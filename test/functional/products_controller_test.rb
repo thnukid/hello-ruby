@@ -52,4 +52,12 @@ class ProductsControllerTest < ActionController::TestCase
 
     assert_redirected_to products_path
   end
-end
+
+  test "should display 4 input fields for editing" do
+    get :edit, id: @product
+    assert_response :success
+    assert_select ".field label", minimum: 4
+    assert_select ".actions input",1
+  end
+
+  end
