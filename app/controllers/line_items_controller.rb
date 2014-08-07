@@ -93,7 +93,7 @@ class LineItemsController < ApplicationController
         if current_cart.line_items.empty?
           format.html{redirect_to store_url, notice: 'Your shopping cart is now empty.'}
         else
-          format.html { redirect_to current_cart, notice: 'Product was removed.' }
+          format.html { redirect_to store_url, notice: 'Product was removed.' }
         end
           format.json { head :no_content }
     end
