@@ -1,4 +1,7 @@
 Depot::Application.routes.draw do
+  resources :users
+
+
   resources :pay_types
 
   resources :orders
