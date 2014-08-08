@@ -57,12 +57,15 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
+    current_password = params[:user].delete(:current_password) # Return and get password
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(params[:user]) && @user.authenticate(current_password)
+       # if @user.update_attributes(params[:user])
         format.html { redirect_to users_url, notice: "User #{@user.name} was successfully updated." }
         format.json { head :no_content }
       else
+        @user.errors.add(:current_password, "for user is incorrect")
         format.html { render action: "edit" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
