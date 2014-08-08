@@ -3,9 +3,14 @@ class StoreController < ApplicationController
  
  
   def index
-    @products = Product.order(:title)
-    @cart = current_cart
-   #playtime
+    if params[:set_locale]
+      redirect_to store_path(locale: params[:set_locale])
+    else
+      @products = Product.order(:title)
+      @cart = current_cart
+    end
+
+    #playtime
     @current_time = Time.now.strftime("%B %e, %Y at %I:%M %p")
     if session[:counter].nil?
       session[:counter] = 1
