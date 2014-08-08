@@ -15,8 +15,12 @@ class ApplicationController < ActionController::Base
   protected
 
   def authorize
-    unless User.find_by_id(session[:user_id])
-      redirect_to login_url, notice: "Please log in"
+      unless User.find_by_id(session[:user_id]) or User.count == 0
+         redirect_to login_url, notice: "Please log in"
+     end
+
+    if User.count == 0
+     flash[:notice] = "Please create an Administrator account to secure your depot shop!"
     end
   end
 
