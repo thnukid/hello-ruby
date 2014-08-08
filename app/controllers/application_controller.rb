@@ -16,8 +16,19 @@ class ApplicationController < ActionController::Base
 
   def authorize
       unless User.find_by_id(session[:user_id]) or User.count == 0
-         redirect_to login_url, notice: "Please log in"
-     end
+        if request.format == Mime::HTML
+           redirect_to login_url, notice: "Please log in"
+        elsif
+          if user = authenticate_with_http_basic do |u,p|
+            find_user = User.find_by_name(u)
+            find_user.authenticate(p) if find_user
+          end
+          session[:user_id] = user.id
+          elsif
+            render :status => 403, :text => "login failed" and return
+          end
+        end
+      end
 
     if User.count == 0
      flash[:notice] = "Please create an Administrator account to secure your depot shop!"
