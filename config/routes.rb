@@ -7,6 +7,7 @@ Depot::Application.routes.draw do
     delete 'logout' => :destroy
   end
 
+scope '(:locale)' do
   resources :users
 
   resources :pay_types
@@ -80,7 +81,7 @@ Depot::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
-  
+end
 
 
 
