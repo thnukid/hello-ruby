@@ -2,8 +2,8 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
-
+   # @products = Product.all
+      @products = Product.where(locale: I18n.locale)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @products }

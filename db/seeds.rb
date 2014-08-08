@@ -17,9 +17,17 @@ Product.create(title: 'CoffeeScript',
 	shows you how to hold onto all the power and flexibility of JavaScript
 	while writing clearer, cleaner, and safer code.
       </p>},
-  image_url:   'cs.jpg',    
+  image_url:   'cs.jpg',
+  locale: 'en',
   price: 36.00)
 # . . .
+Product.create(title: 'CoffeeScript Espanol',
+               description:
+               %{<p>  CoffeeScript está bien hecho JavaScript. Proporciona todas JavaScript de funcionalidad envuelto en una sintaxis más limpia, más sucinto. En la primera libro sobre este lenguaje nuevo y emocionante, CoffeeScript gurú Trevor Burnham muestra cómo aferrarse a toda la potencia y flexibilidad de JavaScript al escribir más claro, más limpio, y el código más seguro.  </ p>},
+               image_url:   'cs.jpg',
+               locale: 'es',
+               price: 36.00)
+
 Product.create(title: 'Programming Ruby 1.9',
   description:
     %{<p>
@@ -28,8 +36,15 @@ Product.create(title: 'Programming Ruby 1.9',
         you should add Ruby to your toolbox.
       </p>},
   image_url: 'ruby.jpg',
+  locale: 'en',
   price: 49.95)
 # . . .
+Product.create(title: 'Programming Ruby 1.9 Espanol',
+               description:
+               %{<p>  Ruby es el lenguaje dinámico de más rápido crecimiento y más emocionante  por ahí. Si usted necesita para obtener los programas de trabajo entregados rápido,  debe agregar Ruby a su caja de herramientas.  </ p>},
+               image_url: 'ruby.jpg',
+               locale: 'es',
+               price: 49.95)
 
 Product.create(title: 'Rails Test Prescriptions',
   description: 
@@ -42,7 +57,15 @@ Product.create(title: 'Rails Test Prescriptions',
         including Cucumber, Shoulda, Machinist, Mocha, and Rcov.
       </p>},
   image_url: 'rtp.jpg',
+    locale: 'en',
   price: 34.95)
+
+Product.create(title: 'Rails Prescripciones de ensayo',
+               description:
+               %{<p>  <em> Rails Prueba recetas </ em> es una guía completa de las pruebas  Rails aplicaciones, cubriendo Test-Driven Development, tanto desde el  perspectiva teórica (¿por qué poner a prueba) y desde un punto de vista práctico  (cómo probar con eficacia). Cubre las herramientas de pruebas de Rails centrales y  procedimientos para Rails Rails 2 y 3, y presenta populares complementos,  incluyendo pepino, Shoulda, Maquinista, Mocha, y Rcov.  </ p>},
+               image_url: 'rtp.jpg',
+               locale: 'es',
+               price: 34.95)
 
 PayType.create(name: "Check")
 PayType.create(name: "Credit card")

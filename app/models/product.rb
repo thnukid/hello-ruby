@@ -4,8 +4,8 @@ class Product < ActiveRecord::Base
 
   before_destroy :ensure_not_referenced_by_any_line_item
 
-  attr_accessible :description, :image_url, :price, :title
-  validates :title, :description, presence: true
+  attr_accessible :description, :image_url, :price, :title, :locale
+  validates :title, :description, :locale , presence: true
   validates :price, numericality: {greater_than_or_equal_to: 0.01}
   validates :title, uniqueness: true, length:{minimum: 10, message: 'must  be longer than 10 letters'}
   validates :image_url, allow_blank: true, format: {
