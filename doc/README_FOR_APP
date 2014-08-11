@@ -1,2 +1,3 @@
-Use this README file to introduce your application and point to useful places in the API for learning more.
-Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+The app creates a basic online store. It is based on the book "Agile Web Developement with Rails" by Sam Ruby, Dave Thomas, David Heinemeier
+from the "Pragmatic Programmers". It is based on Rails 3.2 and was written during the introduction of my internship at Kabisa.nl.
+Author:Eric.Bartholemy@gmail.com
