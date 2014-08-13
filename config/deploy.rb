@@ -1,10 +1,7 @@
 require 'bundler/capistrano'
 ssh_options[:forward_agent] = true
 set :keep_releases, 3
-# be sure to change these
-#set :user, 'thnukid'
 set :domain, 'root@178.79.154.34'
-#set :application, 'depot'
 
 # adjust if you are using RVM, remove if you are not
 #require "rvm/capistrano"
@@ -40,13 +37,10 @@ set :use_sudo, false
 set :rails_env, :production
 
 namespace :deploy do
-  desc "cause Passenger to initiate a restart"
-  task :restart do
-    run "touch #{current_path}/tmp/restart.txt"
-  end
   desc "reload the database with seed data"
   task :seed do
     run "cd #{current_path}; rake db:seed RAILS_ENV=#{rails_env}"
+     #after 'deploy:update_code', 'deploy:seed'
   end
 end
 
@@ -57,7 +51,6 @@ namespace :rails_config do
         end
         after "deploy:finalize_update", "rails_config:symlink"
         after 'deploy:update_code', 'deploy:migrate'
-        after 'deploy:update_code', 'deploy:seed'
         after "deploy:restart", "deploy:cleanup"
 end
 
@@ -69,20 +62,3 @@ namespace :passenger do
                 end
           after 'deploy:restart', 'passenger:restart'
 end
-
-#copy shared config for database to current path
-#after 'deploy:update_code', 'copy_database_yml'
-#  desc "copy shared/database.yml to current/config/database.yml"
-#    task :copy_database_yml do
-#      run "cp #{shared_path}/database.yml #{current_path}/config/database.yml"
-#  end
-
-#run migrations on the deploy
-#after 'deploy:update_code', 'deploy:migrate'
-
-#clean up old deploys, keep last recent 3
-#set :keep_releases, 3
-#after "deploy:restart", "deploy:cleanup"
-
-
-
