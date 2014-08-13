@@ -1,79 +1,67 @@
-# config valid only for Capistrano 3.1
-#require 'capistrano/ext/multistage'
-lock '3.2.1'
+require 'bundler/capistrano'
+ssh_options[:forward_agent] = true
+# be sure to change these
+#set :user, 'thnukid'
+set :domain, 'root@178.79.154.34'
+#set :application, 'depot'
 
-#config stuff
-set :application, 'hello-ruby'
-set :repo_url, 'git@github.com:thnukid/hello-ruby.git'
-set :branch, 'master'
-set :user, "root"
+# adjust if you are using RVM, remove if you are not
+#require "rvm/capistrano"
+#set :rvm_ruby_string, '1.9.3'
+#set :rvm_type, :user
 
+# file paths
+set :repository,  "git@github.com:thnukid/hello-ruby.git"
+set :deploy_to, "/var/www/hello-ruby.com" 
 
-# Default deploy_to directory is /var/www/my_app
-set :deploy_to, '/var/www/hello-ruby.com'
+# distribute your applications across servers (the instructions below put them
+# all on the same server, defined above as 'domain', adjust as necessary)
+role :app, domain
+role :web, domain
+role :db, domain, :primary => true
 
-#multistaging environments
-#set :stages, ["staging", "production"]
-#set :default_stage, "staging"
+# you might need to set this if you aren't seeing password prompts
+# default_run_options[:pty] = true
 
-# Default branch is :master
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
-
-
-# Default value for :scm is :git
-# set :scm, :git
-
-# Default value for :format is :pretty
-# set :format, :pretty
-
-# Default value for :log_level is :debug
-# set :log_level, :debug
-
-# Default value for :pty is false
-# set :pty, true
-
-# Default value for :linked_files is []
-# set :linked_files, %w{config/database.yml}
-
-# Default value for linked_dirs is []
-# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-
-# Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
-# Default value for keep_releases is 5
-set :keep_releases, 3
-set :rails_env, :production
+# As Capistrano executes in a non-interactive mode and therefore doesn't cause
+# any of your shell profile scripts to be run, the following might be needed
+# if (for example) you have locally installed gems or applications.  Note:
+# this needs to contain the full values for the variables set, not simply
+# the deltas.
+# default_environment['PATH']='<your paths>:/usr/local/bin:/usr/bin:/bin'
+# default_environment['GEM_PATH']='<your paths>:/usr/lib/ruby/gems/1.8'
+# miscellaneous options
 set :deploy_via, :remote_cache
+set :scm, 'git'
+set :branch, 'master'
+set :scm_verbose, true
+set :use_sudo, false
+set :rails_env, :production
 
 namespace :deploy do
-
-  desc 'cause Passenger to initiate a restart'
+  desc "cause Passenger to initiate a restart"
   task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-     execute :touch, release_path.join('tmp/restart.txt')
-     #run "touch #{current_path}/tmp/restart.txt"
-    end
-  desc 'reload the database with seed data'
-    task :seed do
-     # run "cd #{current_path}; rake db:seed RAILS_ENV=#{rails_env}"
-    end
-  desc 'compile assets'
-    task :assets do
-      #run "cd #{current_path}; rake assets:precompile RAILS_ENV=#{rails_env}"
-    end
+    run "touch #{current_path}/tmp/restart.txt"
   end
-
-  after :publishing, :restart
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      within release_path do
-         execute :rake, 'cache:clear'
-       end
-    end
+  desc "reload the database with seed data"
+  task :seed do
+    run "cd #{current_path}; rake db:seed RAILS_ENV=#{rails_env}"
   end
-
 end
+
+#copy shared config for database to current path
+after 'deploy:create_symlink', 'copy_database_yml'
+  desc "copy shared/database.yml to current/config/database.yml"
+    task :copy_database_yml do
+      run "cp #{shared_path}/database.yml #{current_path}/config/database.yml"
+  end
+
+#run migrations on the deploy
+after 'deploy:update_code', 'deploy:migrate'
+
+#clean up old deploys, keep last recent 3
+set :keep_releases, 5
+after "deploy:restart", "deploy:cleanup"
+
+
+
