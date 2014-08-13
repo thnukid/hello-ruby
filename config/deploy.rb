@@ -1,5 +1,6 @@
 require 'bundler/capistrano'
 ssh_options[:forward_agent] = true
+set :keep_releases, 3
 # be sure to change these
 #set :user, 'thnukid'
 set :domain, 'root@178.79.154.34'
@@ -49,19 +50,39 @@ namespace :deploy do
   end
 end
 
+namespace :rails_config do
+    desc "Symlink the important config files to the current release"
+      task :symlink, roles: :app do
+            run "cp #{shared_path}/database.yml #{release_path}/config/database.yml"
+        end
+        after "deploy:finalize_update", "rails_config:symlink"
+        after 'deploy:update_code', 'deploy:migrate'
+        after 'deploy:update_code', 'deploy:seed'
+        after "deploy:restart", "deploy:cleanup"
+end
+
+namespace :passenger do
+    task :start do end
+      task :stop  do end
+        task :restart do
+              run "touch #{current_path}/tmp/restart.txt"
+                end
+          after 'deploy:restart', 'passenger:restart'
+end
+
 #copy shared config for database to current path
-after 'deploy:create_symlink', 'copy_database_yml'
-  desc "copy shared/database.yml to current/config/database.yml"
-    task :copy_database_yml do
-      run "cp #{shared_path}/database.yml #{current_path}/config/database.yml"
-  end
+#after 'deploy:update_code', 'copy_database_yml'
+#  desc "copy shared/database.yml to current/config/database.yml"
+#    task :copy_database_yml do
+#      run "cp #{shared_path}/database.yml #{current_path}/config/database.yml"
+#  end
 
 #run migrations on the deploy
-after 'deploy:update_code', 'deploy:migrate'
+#after 'deploy:update_code', 'deploy:migrate'
 
 #clean up old deploys, keep last recent 3
-set :keep_releases, 5
-after "deploy:restart", "deploy:cleanup"
+#set :keep_releases, 3
+#after "deploy:restart", "deploy:cleanup"
 
 
 
