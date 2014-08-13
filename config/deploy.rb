@@ -39,13 +39,13 @@ set :rails_env, :production
 namespace :deploy do
   desc "reload the database with seed data"
   task :seed do
-    run "cd #{current_path}; rake db:seed RAILS_ENV=#{rails_env}"
+   # run "cd #{current_path}; rake db:seed RAILS_ENV=#{rails_env}"
      #after 'deploy:update_code', 'deploy:seed'
   end
 end
 
 namespace :rails_config do
-    desc "Symlink the important config files to the current release"
+    desc "Copy the important config files to the current release"
       task :symlink, roles: :app do
             run "cp #{shared_path}/database.yml #{release_path}/config/database.yml"
         end
