@@ -26,7 +26,7 @@
             %li
               %a{href: '/'+link} #{t link}
 
-        - if defined? session[:userid]
+        - if (session[:userid])
           %ul
             %li 
               = link_to 'Orders', orders_path
