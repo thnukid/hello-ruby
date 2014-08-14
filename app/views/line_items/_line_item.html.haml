@@ -1,0 +1,5 @@
+%tr{ line_item == @current_item ? {id: "current_item"}: {}}
+  %td #{line_item.quantity}&times
+  %td #{line_item.product.title}
+  %td.item_price #{currency_to_locale line_item.total_price }
+  %td= button_to '[X]', line_item, :method => :delete, :confirm => 'Are you sure?'
