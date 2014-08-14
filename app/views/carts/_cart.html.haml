@@ -1,0 +1,10 @@
+%h2
+  = t '.title'
+%table
+  = render @cart.line_items
+  %tr.total_line
+    %td{colspan: 2} Total
+    %td.total_cell
+      = currency_to_locale @cart.total_price
+=button_to "#{t'.checkout'}", new_order_path, method: :get, :action => :checkout if @order.nil?
+=button_to "#{t'.empty'}", @cart, method: :delete, data: {confirm: 'Are you sure?'}, remote:true
