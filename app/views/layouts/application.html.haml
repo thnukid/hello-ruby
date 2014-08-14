@@ -1,0 +1,47 @@
+!!!
+%html
+  %head
+    %title Depot
+    = stylesheet_link_tag 'application', :media => 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  %body{class: controller.controller_name}
+    
+    #banner
+      = form_tag store_path, class: 'locale' do
+        = select_tag 'set_locale', options_for_select(LANGUAGES, I18n.locale.to_s), onchange: 'this.form.submit()'
+        = submit_tag 'submit'
+        = javascript_tag "$('.locale input').hide()"
+      = image_tag "logo.png"
+      = @page_title || t('.title')
+
+    #columns
+      #side
+        - if @cart
+          = hidden_div_if @cart.line_items.empty?, id: 'cart' do
+            #cart
+              = render @cart
+        %ul
+          = ['home', 'questions', 'news', 'contact'].each do |link|
+            %li
+              %a{href: '/'+link} #{t link}
+
+        - if defined? session[:userid]
+          %ul
+            %li 
+              = link_to 'Orders', orders_path
+            %li
+              = link_to 'Products', products_path
+            %li
+              = link_to 'Users', users_path
+          = button_to 'Logout', logout_path, method: :delete
+        
+        - if (store_visited >= 5)
+          %br
+          %br
+          %small You have visited the store #{pluralize store_visited, 'time'} without buying!
+          %br
+          %small #{@current_time}
+      
+      #main
+        = yield
