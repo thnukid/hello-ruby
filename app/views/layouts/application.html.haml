@@ -22,7 +22,7 @@
             #cart
               = render @cart
         %ul
-          = ['home', 'questions', 'news', 'contact'].each do |link|
+          - %w{home questions news contact}.each do |link|
             %li
               %a{href: '/'+link} #{t link}
 

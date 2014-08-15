@@ -39,15 +39,15 @@ gem 'capistrano', '~>2.15.4'
 # To use debugger
 # gem 'debugger'
 
-group :test,:development do
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
+#group :test,:development do
+#  gem 'rspec-rails'
+#  gem 'factory_girl_rails'
+#end
+
+group :test do
   gem 'cucumber', '1.1.3'
-  gem 'rspec-expectations', '2.7.0'
+  #gem 'rspec-expectations', '2.7.0'
 end
-
-
-
 
 gem 'will_paginate', '~> 3.0'
 gem 'bcrypt-ruby', '~> 3.0.0'
