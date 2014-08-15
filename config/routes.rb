@@ -12,7 +12,9 @@ scope '(:locale)' do
 
   resources :pay_types
 
-  resources :orders
+  resources :orders do
+    resources :line_items
+  end
 
   resources :line_items
 
