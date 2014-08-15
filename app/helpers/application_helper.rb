@@ -9,7 +9,7 @@ module ApplicationHelper
 
   #playtime
   def store_visited
-   session[:counter]
+   session[:counter] || 0
    end
 
   #playtime - exchange rate eur - us

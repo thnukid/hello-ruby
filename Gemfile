@@ -39,13 +39,16 @@ gem 'capistrano', '~>2.15.4'
 # To use debugger
 # gem 'debugger'
 
-#group :test,:development do
-#  gem 'rspec-rails'
-#  gem 'factory_girl_rails'
-#end
+group :test,:development do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'pry'
+end
 
 group :test do
-  gem 'cucumber', '1.1.3'
+  gem 'cucumber-rails'
+  gem 'database_cleaner'
+  gem 'faker'
   #gem 'rspec-expectations', '2.7.0'
 end
 
