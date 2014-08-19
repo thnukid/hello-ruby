@@ -12,5 +12,8 @@
 #
 #= require jquery
 #= require jquery-ui
-#= require_tree .
 #= require jquery_ujs
+#= require lib/underscore
+#= require lib/backbone
+#= require lib/marionette
+#= require_tree .
