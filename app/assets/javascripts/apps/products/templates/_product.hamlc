@@ -1,0 +1,4 @@
+.entry.product-id#{product.id}
+  = image_tag(product.image_url)
+  %h3= product.title
+  %p-sanitize product
