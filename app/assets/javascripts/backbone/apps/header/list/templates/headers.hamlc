@@ -1,0 +1,7 @@
+#header.navbar
+  .navbar-inner
+    .container
+      .row
+        .pull-left
+          .brand Pragmatic Bookshelf
+        %ul.nav.pull-right

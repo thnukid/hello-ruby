@@ -9,6 +9,10 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'haml'
 gem 'haml_coffee_assets'
+gem 'execjs'
+gem 'compass-rails'
+gem 'bootstrap-sass-rails'
+gem 'autoprefixer-rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

@@ -1,1 +1,3 @@
-test
+#footer
+  .container
+    %p.muted Depot Backbone Webshop

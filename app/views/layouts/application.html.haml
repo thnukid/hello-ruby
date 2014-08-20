@@ -7,6 +7,7 @@
     = csrf_meta_tags
   %body{class: controller.controller_name}
     
+    #header-region
     #banner
       = form_tag store_path, class: 'locale' do
         = select_tag 'set_locale', options_for_select(LANGUAGES, I18n.locale.to_s), onchange: 'this.form.submit()'
@@ -15,7 +16,7 @@
       = image_tag "logo.png"
       = @page_title || t('.title')
 
-    #columns
+    #columns.wrap
       #side
         - if @cart
           = hidden_div_if @cart.line_items.empty?, id: 'cart_container' do
@@ -43,7 +44,7 @@
           %br
           %small #{@current_time}
       
-      #main
+      #main.container
         = yield
 
     #footer-region
