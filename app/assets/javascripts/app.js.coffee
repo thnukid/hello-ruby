@@ -4,6 +4,7 @@ App.addRegions
   headerRegion : "#header-region"
   mainRegion : "#main-region"
   footerRegion : "#footer-region"
+  cartRegion: "#cart-region"
 
 App.navigate = (route, options) ->
   options or (options = {})
