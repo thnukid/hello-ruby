@@ -16,6 +16,7 @@
 #= require vendor/underscore.js
 #= require vendor/backbone.js
 #= require vendor/marionette.js
+#= require_tree ./config/
 #= require app.js
 #= require_tree ./entities/
 #= require_tree ./apps/

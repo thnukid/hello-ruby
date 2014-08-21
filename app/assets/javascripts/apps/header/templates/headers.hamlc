@@ -1,0 +1,5 @@
+.navbar-inner
+  .container
+    .pull-left
+      .navbar-brand PRAGMATIC BOOKSHELF
+    %ul.nav.navbar-nav.navbar-right
