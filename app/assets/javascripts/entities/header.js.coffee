@@ -18,5 +18,3 @@
 
   App.reqres.setHandler "header:entities", ->
     API.getHeaders()
-
-  API
