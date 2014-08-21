@@ -1,2 +1,2 @@
 .container
-  %p.muted Depot Backbone Webshop
+  %p.text-muted.text-center Depot Backbone+Marionette Webshop

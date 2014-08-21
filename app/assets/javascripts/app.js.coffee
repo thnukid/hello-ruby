@@ -2,7 +2,7 @@
 
 App.addRegions
   headerRegion : "#header-region"
-  productsRegion : "#products-region"
+  mainRegion : "#main-region"
   footerRegion : "#footer-region"
 
 App.on "start", ->

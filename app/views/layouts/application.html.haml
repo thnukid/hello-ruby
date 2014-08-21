@@ -7,6 +7,7 @@
     = csrf_meta_tags
   %body{class: controller.controller_name}
     #header-region
+
     #banner
       = form_tag store_path, class: 'locale' do
         = select_tag 'set_locale', options_for_select(LANGUAGES, I18n.locale.to_s), onchange: 'this.form.submit()'
@@ -43,7 +44,8 @@
           %br
           %small #{@current_time}
       
-      #main
-        = yield
+      #main-region
+        #main
+          = yield
 
     #footer-region
