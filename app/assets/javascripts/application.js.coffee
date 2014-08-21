@@ -13,6 +13,7 @@
 #= require jquery
 #= require jquery-ui
 #= require hamlcoffee
+#= require js-routes
 #= require vendor/underscore.js
 #= require vendor/backbone.js
 #= require vendor/marionette.js

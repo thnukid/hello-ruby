@@ -13,6 +13,7 @@ gem 'execjs'
 gem 'compass-rails'
 gem 'bootstrap-sass-rails'
 gem 'autoprefixer-rails'
+gem 'js-routes'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
