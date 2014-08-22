@@ -1,0 +1,6 @@
+%td
+  =@quantity
+%td
+  =@price
+%td
+  =@product_id

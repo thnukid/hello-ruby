@@ -1,0 +1,9 @@
+%img{:src => 'assets/cs.jpg', :alt => 'cs'}
+%h3=@title
+%p!=@description
+.price_line
+  %span.price 
+    =@price
+  %button.btn.btn-default.btn-sm
+    %span.glyphicon.glyphicon-shopping-cart 
+    %a{:href => Routes.line_items_path(product_id: "#{@product_id}")} Add to Cart
