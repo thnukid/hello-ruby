@@ -1,6 +1,6 @@
 App.module "Entities", (Entities, App, Backbone, Marionette, $, _) ->
 
-  class Entities.Product extends Backbone.Model
+  class Entities.Product extends Backbone.RelationalModel
     urlRoot: "products"
 
   class Entities.Products extends Backbone.Collection

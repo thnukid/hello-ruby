@@ -1,1 +1,3 @@
 %a{:href => "#{@href}"}= @name
+  - if @badgeCount
+    %span.label.label-info.js-cartCount=@badgeCount

@@ -7,6 +7,9 @@ Depot::Application.routes.draw do
     delete 'logout' => :destroy
   end
 
+  namespace :api do
+    resource :cart
+  end
 scope '(:locale)' do
   resources :users
 
@@ -19,7 +22,6 @@ scope '(:locale)' do
   resources :line_items
 
   resources :carts
-
   get "store/index"
 
   resources :products do

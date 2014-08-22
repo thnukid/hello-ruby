@@ -9,7 +9,7 @@
   API =
     getHeaders: ->
       new Entities.HeaderCollection [
-        {name: "Home", href: "/home"}
+        {name: "My Cart", href: "/home", badgeCount: "0"}
         {name: "Questions", href: "/questions"}
         {name: "News", href: "/news"}
         {name: "Contact", href: "/contact"}

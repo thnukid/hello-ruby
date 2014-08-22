@@ -1,11 +1,26 @@
 App.module "Entities", (Entities, App, Backbone, Marionette, $, _) ->
 
-  class Entities.LineItem extends Backbone.Model
+  class Entities.LineItem extends Backbone.RelationalModel
     urlRoot: "line_items"
+    relations: [
+      type: "HasOne"
+      key: "product"
+      relatedModel: App.Entities.Product
+      ]
 
-  class Entities.Cart extends Backbone.Collection
+  class Entities.LineItemCollection extends Backbone.Collection
     model: Entities.LineItem
-    url: "line_items"
+
+  class Entities.Cart extends Backbone.RelationalModel
+    url: "api/cart"
+    relations: [
+      type: "HasMany"
+      key: "line_items"
+      relatedModel: Entities.LineItem
+      collectionType: Entities.LineItemCollection
+      ]
+    addProduct: (product) ->
+      new LineItem(product_id: product.id)
 
   API =
     getCartEntities: ->
@@ -15,3 +30,7 @@ App.module "Entities", (Entities, App, Backbone, Marionette, $, _) ->
 
   App.reqres.setHandler "cart:entities", ->
     API.getCartEntities()
+
+
+
+

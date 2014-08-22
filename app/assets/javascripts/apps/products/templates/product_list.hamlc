@@ -4,6 +4,6 @@
 .price_line
   %span.price 
     =@price
-  %button.btn.btn-default.btn-sm
+  %button.btn.btn-default.btn-sm.js-addToCart
     %span.glyphicon.glyphicon-shopping-cart 
-    %a{:href => Routes.line_items_path(product_id: "#{@product_id}")} Add to Cart
+    Add to Cart

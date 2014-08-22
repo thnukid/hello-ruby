@@ -16,6 +16,7 @@
 #= require js-routes
 #= require vendor/underscore.js
 #= require vendor/backbone.js
+#= require backbone-relational
 #= require vendor/marionette.js
 #= require_tree ./config/
 #= require app.js

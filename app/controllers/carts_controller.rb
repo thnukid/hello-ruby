@@ -24,7 +24,8 @@ class CartsController < ApplicationController
     else
       respond_to do |format|
         format.html # show.html.erb
-        format.json { render json: @cart }
+        format.json { render json: @cart.to_json(:include => {
+          :line_items => { :include => :product }})}
       end
   end
 end
